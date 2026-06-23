@@ -138,10 +138,11 @@ Use WebSearch to find stories. Use WebFetch for verification. Run 3-5 searches p
 Follow `data/style-guide.md` exactly.
 
 For each story, produce:
-- `headline_en` -- 2-3 words, must pass 4-part test
-- `headline_zh` -- independent Chinese headline
-- `blurb_en` -- bilingual blurb (Prompt Response voice)
-- `blurb_zh` -- Chinese blurb (matching register)
+- `headline_en` -- literal, factual headline about the subject (NOT clever, NOT punny)
+- `headline_zh` -- literal Chinese headline about the same subject (NOT a translation)
+- `blurb_en` -- exactly ONE sentence in English capturing the key takeaway
+- `blurb_zh` -- exactly ONE sentence in Chinese capturing the key takeaway
+- `image_url` -- hero image or OG image from the source page (use WebFetch to extract og:image)
 - `article_date` -- YYYY-MM-DD
 - `source_url` -- original source link
 - `source_name` -- publication name
@@ -150,6 +151,21 @@ For each story, produce:
 - `confidence` -- high / medium / low
 - `verification_notes` -- how verified
 - `tags` -- relevant keywords
+
+### Headline Rules
+Headlines are literal and descriptive. They tell the reader what the story is about.
+- GOOD: "DJI launches Osmo 360 camera to rival Insta360"
+- BAD: "Sphere Play" (clever pun, says nothing)
+- GOOD: "大疆发布Osmo 360全景相机"
+- BAD: "全景对决" (vague wordplay)
+
+### Blurb Rules
+One sentence each. English and Chinese are independent — not translations of each other.
+
+### Image Extraction
+For every story, use WebFetch on the source_url and extract the og:image meta tag.
+If no og:image exists, try the first large image in the article.
+If no image is available, set image_url to empty string "".
 
 ### Editorial Score (1-10)
 - 9-10: Lead story. Hard news, real competitive intelligence.
@@ -170,11 +186,12 @@ Write to `data/results/stories_YYYY-MM-DD.json`:
     "id": "2026-06-16-dji-air-4-launch",
     "date_found": "2026-06-16",
     "article_date": "2026-06-14",
-    "headline_en": "Air Supply",
-    "headline_zh": "补充空气",
+    "headline_en": "DJI launches Air 4 drone with updated stabilization",
+    "headline_zh": "大疆发布搭载新稳定系统的Air 4无人机",
     "category": "production",
-    "blurb_en": "DJI shipped the Air 4 Tuesday...",
-    "blurb_zh": "大疆周二发布了Air 4...",
+    "blurb_en": "DJI's Air 4 matches the Mini 4 Pro on specs while adding a new 3-axis stabilization system that the company says eliminates jello in high winds.",
+    "blurb_zh": "大疆Air 4在规格上持平Mini 4 Pro，同时新增三轴增稳系统，官方称可在强风中消除果冻效应。",
+    "image_url": "https://cdn.theverge.com/example-air4.jpg",
     "source_url": "https://...",
     "source_name": "The Verge",
     "source_type": "original_reporting",
