@@ -1,4 +1,8 @@
-# Prompt Response ICS -- Claude Code Project Prompt
+# Sky's News-O-Matic -- Claude Code Project Prompt
+
+## Goal
+
+Convey useful camera/imaging industry information to Sky's English-reading and speaking coworkers at Insta360 ICS creative studio. This is a personal, non-commercial project — a curated news feed, not a publication. Keep entries direct and informative.
 
 ## How This Works
 
@@ -162,10 +166,13 @@ Headlines are literal and descriptive. They tell the reader what the story is ab
 ### Blurb Rules
 One sentence each. English and Chinese are independent — not translations of each other.
 
-### Image Extraction
-For every story, use WebFetch on the source_url and extract the og:image meta tag.
-If no og:image exists, try the first large image in the article.
-If no image is available, set image_url to empty string "".
+### Image Sourcing
+Every story MUST have a working image. No exceptions. This is a personal, non-commercial project — all image use is protected.
+
+Priority:
+1. **Article image** -- WebFetch the source_url, extract the og:image meta tag
+2. **Wikimedia Commons** -- If the article has no image, search Wikimedia Commons for a relevant photo (the product, the company, the technique). Use a direct upload.wikimedia.org URL.
+3. **Web image search** -- Last resort: WebSearch for a relevant image
 
 ### Editorial Score (1-10)
 - 9-10: Lead story. Hard news, real competitive intelligence.
